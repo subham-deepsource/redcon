@@ -113,8 +113,7 @@ func TestRandomCommands(t *testing.T) {
 		}
 		bufs = append(bufs, msg)
 	}
-	bufs = append(bufs, lmsg)
-	bufs = append(bufs, "RESET THE INDEX\r\n")
+	bufs = append(bufs, lmsg, "RESET THE INDEX\r\n")
 
 	// pipe valid RESP commands in large broken chunks
 	lmsg = ""
@@ -135,8 +134,7 @@ func TestRandomCommands(t *testing.T) {
 		}
 		bufs = append(bufs, msg)
 	}
-	bufs = append(bufs, lmsg)
-	bufs = append(bufs, "RESET THE INDEX\r\n")
+	bufs = append(bufs, lmsg, "RESET THE INDEX\r\n")
 
 	// Pipe the buffers in a background routine
 	rd, wr := io.Pipe()
