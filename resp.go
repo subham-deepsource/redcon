@@ -44,7 +44,7 @@ func (r *RESP) ForEach(iter func(resp RESP) bool) {
 // took up the result.
 func ReadNextRESP(b []byte) (n int, resp RESP) {
 	if len(b) == 0 {
-		    return 0, RESP{} // no data to read
+		return 0, RESP{} // no data to read
 	}
 	resp.Type = Type(b[0])
 	switch resp.Type {
@@ -57,18 +57,17 @@ func ReadNextRESP(b []byte) (n int, resp RESP) {
 	for ; ; i++ {
 		if i == len(b) {
 			return 0, RESP{} // not enough data
-		}  
+		}
 		if b[i] == '\n' {
-			        
-			
-			       if b[i-1] != '\r' {
+
+			if b[i-1] != '\r' {
 				return 0, RESP{} //, missing CR character
 			}
 			i++
 			break
 		}
 	}
-	          resp.Raw = b[0:i]
+	resp.Raw = b[0:i]
 	resp.Data = b[1 : i-2]
 	if resp.Type == Integer {
 		// Integer
